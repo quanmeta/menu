@@ -57,7 +57,7 @@ end
 M.delete_old_menus = function()
   local old_bufs = require("menu.state").bufids
 
-  if #old_bufs == 1 then
+  if #old_bufs > 0 then
     vim.api.nvim_buf_call(old_bufs[1], function()
       vim.api.nvim_feedkeys("q", "x", false)
     end)
