@@ -36,17 +36,17 @@ M.nav_win = function()
   end
 end
 
-M.auto_close = function(close_post)
+M.auto_close = function()
   -- clear menu if clicked outside
   vim.keymap.set("n", "<LeftMouse>", function()
     vim.cmd.exec '"normal! \\<LeftMouse>"'
     local bufid = vim.api.nvim_win_get_buf(vim.fn.getmousepos().winid)
+    local menu_buf = state.bufids[1]
 
-    if state.bufids[1] and vim.bo[bufid].ft ~= "NvMenu" then
-      require("volt.utils").close {
-        bufs = vim.tbl_keys(state.bufs),
-        after_close = close_post,
-      }
+    if menu_buf and vim.bo[bufid].ft ~= "NvMenu" then
+      vim.api.nvim_buf_call(menu_buf, function()
+        vim.api.nvim_feedkeys("q", "x", false)
+      end)
 
       vim.keymap.del("n", "<LeftMouse>")
     end

@@ -102,7 +102,7 @@ M.open = function(items, opts)
     mappings.nav_win()
     mappings.actions(items, buf)
   else
-    mappings.auto_close(close_post)
+    mappings.auto_close()
   end
 end
 
