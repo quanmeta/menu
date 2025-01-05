@@ -45,13 +45,23 @@ M.switch_win = function(n)
   local cur_i = get_bufi(api.nvim_get_current_buf())
 
   if n == -1 and cur_i == 1 then
-    cur_i = #state.bufids +1
+    cur_i = #state.bufids + 1
   elseif n == 1 and cur_i == #state.bufids then
     cur_i = 0
   end
 
   local buf = state.bufids[cur_i + n]
   api.nvim_set_current_win(fn.bufwinid(buf))
+end
+
+M.delete_old_menus = function()
+  local old_bufs = require("menu.state").bufids
+
+  if #old_bufs == 1 then
+    vim.api.nvim_buf_call(old_bufs[1], function()
+      vim.api.nvim_feedkeys("q", "x", false)
+    end)
+  end
 end
 
 return M

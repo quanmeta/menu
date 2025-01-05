@@ -91,9 +91,7 @@ M.open = function(items, opts)
       api.nvim_win_set_cursor(state.old_data.win, state.old_data.cursor)
     end
 
-    vim.schedule(function()
-      state.bufids = {}
-    end)
+    state.bufids = {}
   end
 
   volt.mappings { bufs = vim.tbl_keys(state.bufs), after_close = close_post }
