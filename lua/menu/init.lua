@@ -88,7 +88,9 @@ M.open = function(items, opts)
 
     if api.nvim_win_is_valid(state.old_data.win) then
       api.nvim_set_current_win(state.old_data.win)
-      api.nvim_win_set_cursor(state.old_data.win, state.old_data.cursor)
+      vim.schedule(function()
+        api.nvim_win_set_cursor(state.old_data.win, state.old_data.cursor)
+      end)
     end
 
     state.bufids = {}
