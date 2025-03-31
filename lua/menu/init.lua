@@ -69,8 +69,6 @@ M.open = function(items, opts)
     { buf = buf, ns = ns, layout = layout },
   }
 
-  api.nvim_win_set_hl_ns(win, ns)
-
   if config.border then
     vim.wo[win].winhl = "Normal:Normal,FloatBorder:LineNr"
   else
