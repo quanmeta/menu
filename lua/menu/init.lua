@@ -87,10 +87,10 @@ M.open = function(items, opts)
     if api.nvim_win_is_valid(state.old_data.win) then
       api.nvim_set_current_win(state.old_data.win)
       vim.schedule(function()
-        local cursor_line = math.max(1,state.old_data.cursor[1])
+        local cursor_line = math.max(1, state.old_data.cursor[1])
         local cursor_col = math.max(0, state.old_data.cursor[2])
 
-        api.nvim_win_set_cursor(state.old_data.win, { cursor_line, cursor_col })
+        pcall(api.nvim_win_set_cursor, state.old_data.win, { cursor_line, cursor_col })
       end)
     end
 
