@@ -25,19 +25,19 @@ return {
 
   {
     name = "复制",
-    cmd = "%y+",
+    cmd = '"+y',
     rtxt = "y",
   },
   
   {
     name = "粘贴",
-    cmd = "\"_d\"+P",
+    cmd = '"_d"+P',
     rtxt = "p",
   },
 
   {
     name = "删除",
-    cmd = "\"_x",
+    cmd = '"_x',
     rtxt = "<Delete>",
   },
 
