@@ -1,9 +1,10 @@
 return {
 
   {
-    name = "格式化",
+    name = "Format",
     cmd = function()
       local ok, conform = pcall(require, "conform")
+
       if ok then
         conform.format { lsp_fallback = true }
       else
@@ -11,6 +12,12 @@ return {
       end
     end,
     rtxt = ",F",
+  },
+
+  {
+    name = "Code Actions",
+    cmd = vim.lsp.buf.code_action,
+    rtxt = "<leader>ca",
   },
 
   { name = "separator" },
@@ -24,51 +31,29 @@ return {
   { name = "separator" },
 
   {
-    name = "复制",
-    cmd = '"+y',
-    rtxt = "y",
-  },
-  
-  {
-    name = "粘贴",
-    cmd = '"_d"+P',
-    rtxt = "p",
+    name = "Copy",
+    cmd = "%y+",
+    rtxt = "<C-c>",
   },
 
   {
-    name = "删除",
-    cmd = '"_x',
-    rtxt = "<Delete>",
+    name = "Delete",
+    cmd = "%d",
+    rtxt = "dc",
   },
 
   { name = "separator" },
 
   {
-    name = "  打开终端",
+    name = "  Open in terminal",
     hl = "ExRed",
-    cmd = function()
-      local cwd = vim.fn.expand("%:p:h")
-      local float_term = require("toggleterm.terminal").Terminal:new({
-        dir = cwd,
-        direction = "float",
-        close_on_exit = true,
-        hidden = true,
-        float_opts = {
-          border = "curved", -- 可选: "single", "double", "shadow", "rounded", "curved"
-          width = 80,
-          height = 20,
-          winblend = 10,
-        },
-      })
-      float_term:toggle()
-    end,
-    rtxt = "<leader>tf",
+    cmd = vim.cmd( "ToggleTerm direction=vertical" ),
   },
 
   { name = "separator" },
 
   {
-    name = "  颜色选择器",
+    name = "  Color Picker",
     cmd = function()
       require("minty.huefy").open()
     end,
