@@ -1,23 +1,16 @@
 return {
 
   {
-    name = "Format Buffer",
+    name = "格式化",
     cmd = function()
       local ok, conform = pcall(require, "conform")
-
       if ok then
         conform.format { lsp_fallback = true }
       else
         vim.lsp.buf.format()
       end
     end,
-    rtxt = "<leader>fm",
-  },
-
-  {
-    name = "Code Actions",
-    cmd = vim.lsp.buf.code_action,
-    rtxt = "<leader>ca",
+    rtxt = ",F",
   },
 
   { name = "separator" },
@@ -31,53 +24,51 @@ return {
   { name = "separator" },
 
   {
-    name = "Edit Config",
-    cmd = function()
-      vim.cmd "tabnew"
-      local conf = vim.fn.stdpath "config"
-      vim.cmd("tcd " .. conf .. " | e init.lua")
-    end,
-    rtxt = "ed",
-  },
-
-  {
-    name = "Copy Content",
+    name = "复制",
     cmd = "%y+",
-    rtxt = "<C-c>",
+    rtxt = "y",
+  },
+  
+  {
+    name = "粘贴",
+    cmd = "\"_d\"+P",
+    rtxt = "p",
   },
 
   {
-    name = "Delete Content",
-    cmd = "%d",
-    rtxt = "dc",
+    name = "删除",
+    cmd = "\"_x",
+    rtxt = "<Delete>",
   },
 
   { name = "separator" },
 
   {
-    name = "  Open in terminal",
+    name = "  打开终端",
     hl = "ExRed",
     cmd = function()
-      local old_buf = require("menu.state").old_data.buf
-      local old_bufname = vim.api.nvim_buf_get_name(old_buf)
-      local old_buf_dir = vim.fn.fnamemodify(old_bufname, ":h")
-
-      local cmd = "cd " .. old_buf_dir
-
-      -- base46_cache var is an indicator of nvui user!
-      if vim.g.base46_cache then
-        require("nvchad.term").new { cmd = cmd, pos = "sp" }
-      else
-        vim.cmd "enew"
-        vim.fn.termopen { vim.o.shell, "-c", cmd .. " ; " .. vim.o.shell }
-      end
+      local cwd = vim.fn.expand("%:p:h")
+      local float_term = require("toggleterm.terminal").Terminal:new({
+        dir = cwd,
+        direction = "float",
+        close_on_exit = true,
+        hidden = true,
+        float_opts = {
+          border = "curved", -- 可选: "single", "double", "shadow", "rounded", "curved"
+          width = 80,
+          height = 20,
+          winblend = 10,
+        },
+      })
+      float_term:toggle()
     end,
+    rtxt = "<leader>tf",
   },
 
   { name = "separator" },
 
   {
-    name = "  Color Picker",
+    name = "  颜色选择器",
     cmd = function()
       require("minty.huefy").open()
     end,
