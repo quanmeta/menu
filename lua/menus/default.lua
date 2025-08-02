@@ -41,8 +41,8 @@ return {
 			local mode = vim.fn.mode()
 			if mode == "n" then
 				vim.cmd([[
-                                	normal! mz"_dd`zP
-                                ]])
+					normal! mz"_dd`zP
+				]])
 			elseif mode == "v" or mode == "x" or mode == "\22" then
 				vim.cmd('normal! "_dP')
 			end
