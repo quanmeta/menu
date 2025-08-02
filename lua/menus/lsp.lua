@@ -15,7 +15,7 @@ return {
   {
     name = "Goto Implementation",
     cmd = vim.lsp.buf.implementation,
-    rtxt = "gi",
+    rtxt = "gI",
   },
 
   { name = "separator" },
@@ -29,14 +29,14 @@ return {
   {
     name = "Add workspace folder",
     cmd = vim.lsp.buf.add_workspace_folder,
-    rtxt = "<leader>wa",
+    -- rtxt = "<leader>wa",
   },
 
-  {
-    name = "Remove workspace folder",
-    cmd = vim.lsp.buf.remove_workspace_folder,
-    rtxt = "<leader>wr",
-  },
+  -- {
+  --   name = "Remove workspace folder",
+  --   cmd = vim.lsp.buf.remove_workspace_folder,
+  --   rtxt = "<leader>wr",
+  -- },
 
   {
     name = "Show References",
@@ -57,12 +57,12 @@ return {
         vim.lsp.buf.format()
       end
     end,
-    rtxt = "<leader>fm",
+    rtxt = ",F",
   },
 
-  {
-    name = "Code Actions",
-    cmd = vim.lsp.buf.code_action,
-    rtxt = "<leader>ca",
-  },
+  -- {
+  --   name = "Code Actions",
+  --   cmd = vim.lsp.buf.code_action,
+  --   rtxt = "<leader>ca",
+  -- },
 }
