@@ -26,7 +26,7 @@ return {
 
   {
     name = "Copy",
-    cmd = "y +",
+    cmd = "yank",
     rtxt = "y",
   },
 
